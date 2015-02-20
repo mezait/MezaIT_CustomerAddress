@@ -1,0 +1,149 @@
+-- code sample 1
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MezaIT_CustomerAddress>
+            <version>0.0.1</version>
+        </MezaIT_CustomerAddress>
+    </modules>
+</config>
+-- /code sample 1
+
+-- code sample 2
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MezaIT_CustomerAddress>
+            <active>true</active>
+            <codePool>local</codePool>
+        </MezaIT_CustomerAddress>
+    </modules>
+</config>
+-- /code sample 2
+
+-- code sample 3
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <customer_address translate="title" module="mezait_customeraddress">
+                <title>Customer with address</title>
+                <acl>customer_address</acl>
+                <methods>
+                </methods>
+                <faults module="mezait_customeraddress">
+                </faults>
+            </customer_address>
+        </resources>
+        <acl>
+            <resources>
+                <customer_address translate="title" module="mezait_customeraddress">
+                    <title>Customer with address</title>
+                </customer_address>
+            </resources>
+        </acl>
+    </api>
+</config>
+-- /code sample 3
+
+-- code sample 4
+<?php
+class MezaIT_CustomerAddress_Model_Customer_Api extends Mage_Api_Model_Resource_Abstract {
+}
+
+<?php
+class MezaIT_CustomerAddress_Model_Customer_Api_V2 extends MezaIT_CustomerAddress_Model_Customer_Api {
+}
+-- /code sample 4
+
+-- code sample 5
+<global>
+    <models>
+        <mezait_customeraddress>
+            <class>MezaIT_CustomerAddress_Model</class>
+        </mezait_customeraddress>
+    </models>
+</global>
+-- /code sample 5
+
+-- code sample 6
+/**
+ * Number of customers
+ *
+ * @param   null|object|array   $filters    Filters that match the customers
+ *
+ * @return  int     The number of customers
+ */
+public function count($filters = null) {
+    ...
+}
+
+/**
+ * Retrieve a list of customers and addresses
+ *
+ * @param   null|object|array   $filters    Filters that match the customers
+ * @param   int                 $pageNum    Page number
+ * @param   int                 $pageSize   Page size
+ *
+ * @return array    List of customers
+ */
+public function pagedList($filters = null, $pageNum = 1, $pageSize = 10) {
+    ...
+}
+-- /code sample 6
+
+-- code sample 7
+<methods>
+    <count translate="title" module="mezait_customeraddress">
+        <title>Count the number of customers</title>
+        <acl>customer_address/count</acl>
+    </count>
+    <list translate="title" module="mezait_customeraddress">
+        <title>Get list of customers and their default billing address</title>
+        <method>pagedList</method>
+        <acl>customer_address/list</acl>
+    </list>
+</methods>
+<faults module="mezait_customeraddress">
+    <filters_invalid>
+        <code>101</code>
+        <message>Invalid filters specified. Details in error message.</message>
+    </filters_invalid>
+</faults>
+-- /code sample 7
+
+<xsd:complexType name="mezaitCustomerAddress">
+    <xsd:sequence>
+        <xsd:element minOccurs="1" maxOccurs="1" name="customer" type="typens:customerCustomerEntity" />
+        <xsd:element minOccurs="0" maxOccurs="1" name="address" type="typens:customerAddressEntityItem" />
+    </xsd:sequence>
+</xsd:complexType>
+
+<xsd:element name="mezaitCustomerAddressCountRequestParam">
+    <xsd:complexType>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+            <xsd:element minOccurs="0" maxOccurs="1" name="filters" type="typens:filterArray" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:element>
+<xsd:element name="mezaitCustomerAddressCountResponseParam">
+    <xsd:complexType>
+        <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:element>
+
+<wsdl:message name="mezaitCustomerAddressCountRequest">
+    <wsdl:part name="parameters" element="typens:mezaitCustomerAddressCountRequestParam" />
+</wsdl:message>
+<wsdl:message name="mezaitCustomerAddressCountResponse">
+    <wsdl:part name="parameters" element="typens:mezaitCustomerAddressCountResponseParam" />
+</wsdl:message>
+
+        <v2>
+            <resources_function_prefix>
+                <customer_address>mezaitCustomerAddress</customer_address>
+            </resources_function_prefix>
+        </v2>

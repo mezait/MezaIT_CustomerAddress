@@ -1,0 +1,4 @@
+<?php
+class MezaIT_CustomerAddress_Model_Customer_Api_V2 extends MezaIT_CustomerAddress_Model_Customer_Api {
+
+}

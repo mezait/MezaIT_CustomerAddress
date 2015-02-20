@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:typens="urn:{{var wsdl.name}}"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  name="{{var wsdl.name}}"
+                  targetNamespace="urn:{{var wsdl.name}}">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:{{var wsdl.name}}">
+            <xsd:complexType name="mezaitCustomerAddress">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" maxOccurs="1" name="customer" type="typens:customerCustomerEntity" />
+                    <xsd:element minOccurs="0" maxOccurs="1" name="address" type="typens:customerAddressEntityItem" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="mezaitCustomerAddressArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:mezaitCustomerAddress"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="filterArray">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" maxOccurs="unbounded" name="complexObjectArray" type="typens:complexFilterArray"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="mezaitCustomerAddressCountRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="filters" type="typens:filterArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="mezaitCustomerAddressCountResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="mezaitCustomerAddressListRequestParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="sessionId" type="xsd:string" />
+                        <xsd:element minOccurs="0" maxOccurs="1" name="filters" type="typens:filterArray" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="pageNum" type="xsd:int" />
+                        <xsd:element minOccurs="1" maxOccurs="1" name="pageSize" type="xsd:int" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="mezaitCustomerAddressListResponseParam">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="1" maxOccurs="1" name="result" type="typens:mezaitCustomerAddressArray" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="mezaitCustomerAddressCountRequest">
+        <wsdl:part name="parameters" element="typens:mezaitCustomerAddressCountRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="mezaitCustomerAddressCountResponse">
+        <wsdl:part name="parameters" element="typens:mezaitCustomerAddressCountResponseParam" />
+    </wsdl:message>
+    <wsdl:message name="mezaitCustomerAddressListRequest">
+        <wsdl:part name="parameters" element="typens:mezaitCustomerAddressListRequestParam" />
+    </wsdl:message>
+    <wsdl:message name="mezaitCustomerAddressListResponse">
+        <wsdl:part name="parameters" element="typens:mezaitCustomerAddressListResponseParam" />
+    </wsdl:message>
+    <wsdl:portType name="{{var wsdl.handler}}PortType">
+        <wsdl:operation name="mezaitCustomerAddressCount">
+            <wsdl:documentation>Number of customers</wsdl:documentation>
+            <wsdl:input message="typens:mezaitCustomerAddressCountRequest" />
+            <wsdl:output message="typens:mezaitCustomerAddressCountResponse" />
+        </wsdl:operation>
+        <wsdl:operation name="mezaitCustomerAddressList">
+            <wsdl:documentation>Retrieve a list of customers and addresses</wsdl:documentation>
+            <wsdl:input message="typens:mezaitCustomerAddressListRequest" />
+            <wsdl:output message="typens:mezaitCustomerAddressListResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="{{var wsdl.handler}}Binding" type="typens:{{var wsdl.handler}}PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="mezaitCustomerAddressCount">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="mezaitCustomerAddressList">
+            <soap:operation soapAction="" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+</wsdl:definitions>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+    <api>
+        <resources>
+            <customer_address translate="title" module="mezait_customeraddress">
+                <title>Customer with address</title>
+                <model>mezait_customeraddress/customer_api</model>
+                <acl>customer_address</acl>
+                <methods>
+                    <count translate="title" module="mezait_customeraddress">
+                        <title>Count the number of customers</title>
+                        <acl>customer_address/count</acl>
+                    </count>
+                    <list translate="title" module="mezait_customeraddress">
+                        <title>Get list of customers and their default billing address</title>
+                        <method>pagedList</method>
+                        <acl>customer_address/list</acl>
+                    </list>
+                </methods>
+                <faults module="mezait_customeraddress">
+                    <filters_invalid>
+                        <code>101</code>
+                        <message>Invalid filters specified. Details in error message.</message>
+                    </filters_invalid>
+                </faults>
+            </customer_address>
+        </resources>
+        <acl>
+            <resources>
+                <customer_address translate="title" module="mezait_customeraddress">
+                    <title>Customer with address</title>
+                    <count translate="title" module="mezait_customeraddress">
+                        <title>Count the number of customers</title>
+                    </count>
+                    <list translate="title" module="mezait_customeraddress">
+                        <title>Get list of customers and their default billing address</title>
+                    </list>
+                </customer_address>
+            </resources>
+        </acl>
+        <v2>
+            <resources_function_prefix>
+                <customer_address>mezaitCustomerAddress</customer_address>
+            </resources_function_prefix>
+        </v2>
+    </api>
+</config>

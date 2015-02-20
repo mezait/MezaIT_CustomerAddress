@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MezaIT_CustomerAddress>
+            <version>0.0.1</version>
+        </MezaIT_CustomerAddress>
+    </modules>
+    <global>
+        <helpers>
+            <mezait_customeraddress>
+                <class>MezaIT_CustomerAddress_Helper</class>
+            </mezait_customeraddress>
+        </helpers>
+        <models>
+            <mezait_customeraddress>
+                <class>MezaIT_CustomerAddress_Model</class>
+            </mezait_customeraddress>
+        </models>
+    </global>
+    <default>
+        <mezait_customeraddress>
+            <general>
+                <log_sql>0</log_sql>
+            </general>
+        </mezait_customeraddress>
+    </default>
+</config>
